@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FCM Multiple Accounts</string>
+    <string name="txt_log_token">The LOG TOKEN button logs the FCM registration token to logcat</string>
+    <string name="btn_log_token">Log Token</string>
+    <string name="btn_log_token_2">Log Token 2</string>
+    <string name="btn_log_token_3">Log Token 3</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_name">custom channel name</string>
+</resources>

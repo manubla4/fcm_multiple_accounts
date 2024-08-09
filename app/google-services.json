@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "851827660854",
+    "project_id": "melitest2-ffccf",
+    "storage_bucket": "melitest2-ffccf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851827660854:android:8127a2ba097e351dbca097",
+        "android_client_info": {
+          "package_name": "com.example.fcmmultipleaccounts"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0JeaOnG56vw4-QCU3beAd8wNzBFZSOJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
