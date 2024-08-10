@@ -26,7 +26,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
-            it.body?.let { body -> sendNotification(body) }
+            sendNotification(it)
         }
 
     }
@@ -36,7 +36,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
 
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(notif: RemoteMessage.Notification) {
         val requestCode = 0
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -50,11 +50,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("FCM Message")
-            .setContentText(messageBody)
+            .setContentTitle(notif.title ?: "Default Title")
+            .setContentText(notif.body ?: "Default Body")
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.ic_stat_ic_notification)
+            .setColor(resources.getColor(R.color.colorAccent))
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -67,7 +69,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val notificationId = 0
+        val notificationId = (1..1000000).random()
         notificationManager.notify(notificationId, notificationBuilder.build())
     }
 
