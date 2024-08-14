@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.logTokenButton2).setOnClickListener {
             val app = FirebaseApp.getInstance(FIREBASE_SECOND_INSTANCE)
-            val firebaseMessaging = app.get(FirebaseMessaging::class.java) as FirebaseMessaging?
+            val firebaseMessaging = app.get(FirebaseMessaging::class.java)
             firebaseMessaging?.token?.addOnCompleteListener {
                 printToken(it)
             }
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.logTokenButton3).setOnClickListener {
             val app = FirebaseApp.getInstance(FIREBASE_THIRD_INSTANCE)
-            val firebaseMessaging = app.get(FirebaseMessaging::class.java) as FirebaseMessaging?
+            val firebaseMessaging = app.get(FirebaseMessaging::class.java)
             firebaseMessaging?.token?.addOnCompleteListener {
                 printToken(it)
             }
