@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.fcmmultipleaccounts.MainActivity
 import com.example.fcmmultipleaccounts.R
+import com.example.fcmmultipleaccounts.utils.instancesMap
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -18,6 +19,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
+        Log.d(TAG, "From Instance: ${instancesMap[remoteMessage.from] ?: ""}")
 
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
