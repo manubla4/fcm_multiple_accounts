@@ -11,7 +11,11 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.fcmmultipleaccounts.MainActivity
 import com.example.fcmmultipleaccounts.R
+import com.example.fcmmultipleaccounts.utils.FIREBASE_SECOND_INSTANCE
+import com.example.fcmmultipleaccounts.utils.FIREBASE_THIRD_INSTANCE
 import com.example.fcmmultipleaccounts.utils.instancesMap
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -35,6 +39,29 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (it.result == token) {
+                Log.d(TAG, "Refreshed token belongs to default instance")
+            }
+            else {
+                val secondInstanceApp = FirebaseApp.getInstance(FIREBASE_SECOND_INSTANCE)
+                val secondFcm = secondInstanceApp.get(FirebaseMessaging::class.java)
+                secondFcm?.token?.addOnCompleteListener {
+                    if (it.result == token) {
+                        Log.d(TAG, "Refreshed token belongs to second instance")
+                    }
+                    else {
+                        val thirdInstanceApp = FirebaseApp.getInstance(FIREBASE_THIRD_INSTANCE)
+                        val thirdFcm = thirdInstanceApp.get(FirebaseMessaging::class.java)
+                        thirdFcm?.token?.addOnCompleteListener {
+                            if (it.result == token) {
+                                Log.d(TAG, "Refreshed token belongs to third instance")
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
